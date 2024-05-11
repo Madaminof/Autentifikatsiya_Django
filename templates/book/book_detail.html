@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Molina</title>
+</head>
+<body>
+<img src="{{ object.image.url}}" height="250"><br>
+<h3>Book name: {{ object.title}}</h3><br>
+<h3>Date: {{ object.created_at}}</h3><br>
+<h3>Description: {{ object.description}}</h3><br>
+<h3>Page: {{ object.page}}</h3><br>
+<h3>Price: {{ object.price}}</h3><hr>
+
+
+
+
+
+</body>
+
+
+<a href="{% url 'products:delete' object.pk %}">Delete</a><hr>
+<a href="{% url 'products:update' object.pk %}">Update</a>
+
+</html>
