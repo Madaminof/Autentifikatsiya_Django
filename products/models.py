@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-from users.models import CustomUser
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -27,6 +26,8 @@ class Language(models.Model):
         return self.name
 
 
+
+
 class Books(models.Model):
     category = models.ForeignKey(CategoryBooks, on_delete=models.CASCADE)
     book_lang = models.ForeignKey(Language, on_delete=models.DO_NOTHING)
@@ -46,7 +47,7 @@ class Books(models.Model):
         db_table = 'books'
 
     def __str__(self):
-        return self.title
+        return f"{self.title} {self.title}"
 
 
 class Author(models.Model):
@@ -68,7 +69,8 @@ class BookAuthor(models.Model):
         db_table = 'book_author'
 
     def __str__(self):
-        return f"{self.book.title} {self.author.first_name} {self.book_author}"
+        return f"{self.book.title} {self.author.first_name} {self.book.title}"
+
 
 
 class Review(models.Model):
@@ -77,10 +79,10 @@ class Review(models.Model):
         default=0,
         validators=[MaxValueValidator(5), MinValueValidator(1)])
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    author=models.ForeignKey(Author, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'review'
 
     def __str__(self):
-        return f"{self.comment} - {self.star_given} - {self.user.username}"
+        return f"{self.comment} - {self.star_given} - {self.author.first_name}"
