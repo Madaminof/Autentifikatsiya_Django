@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sotuv Bo'limi</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif; /* Set the font family */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        h1 {
+            text-align: center; /* Center-align heading */
+            color: #333; /* Set color for heading */
+        }
+
+        img {
+            display: block; /* Ensure the image is displayed as a block element */
+            margin: 0 auto; /* Center-align the image */
+            max-width: 100%; /* Ensure the image doesn't exceed its container */
+            height: auto; /* Maintain aspect ratio of the image */
+        }
+
+        hr {
+            border: none; /* Remove default border */
+            border-top: 1px solid #ccc; /* Add a horizontal line */
+            margin: 20px auto; /* Add margin above and below the line and center-align it */
+            max-width: 80%; /* Set maximum width for the line */
+        }
+
+        h2 {
+            color: #666; /* Set color for subheadings */
+        }
+
+        a {
+            color: blue; /* Set color for links */
+            text-decoration: none; /* Remove underline from links */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline links on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Your HTML content here -->
+    <h1>Sotib Olish</h1>
+    <img src="{{ object.image.url }}" alt="Book Image"><hr>
+    <h2>Book Name: {{ object.name }}</h2>
+    <h2>Price: {{ object.price }}</h2>
+</body>
+<a href="{% url 'products:detail' object.pk %}">Orqaga</a>
+</html>

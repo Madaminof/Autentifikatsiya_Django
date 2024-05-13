@@ -58,10 +58,11 @@
     <h3>Page: {{ object.page }}</h3><br>
     <h3>Price: {{ object.price }}</h3><hr>
 
-    <a href="{% url 'products:list' %}">Go Back</a><hr>
 
-    <a href="{% url 'products:delete' object.pk %}">Delete</a><hr>
     <a href="{% url 'products:update' object.pk %}">Update</a>
+    <a href="{% url 'products:savat' object.pk %}">Sotib olish</a>
+     <a href="{% url 'products:list' %}">Go Back</a><hr>
+
 </div>
 </body>
 </html>

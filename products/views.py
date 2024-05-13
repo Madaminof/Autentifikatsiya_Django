@@ -40,3 +40,10 @@ class BookUptadeView(UpdateView):
     template_name = 'book/book_update.html'
     fields = ['price']
 
+
+
+class Savat(BookDetailView):
+    model=Books
+    template_name='book/savat.html'
+
+
