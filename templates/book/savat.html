@@ -49,7 +49,7 @@
     <!-- Your HTML content here -->
     <h1>Sotib Olish</h1>
     <img src="{{ object.image.url }}" alt="Book Image"><hr>
-    <h2>Book Name: {{ object.name }}</h2>
+    <h2>Book Name: {{ object.title }}</h2>
     <h2>Price: {{ object.price }}</h2>
 </body>
 <a href="{% url 'products:detail' object.pk %}">Orqaga</a>
