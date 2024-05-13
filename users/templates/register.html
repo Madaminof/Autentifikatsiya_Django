@@ -3,18 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form styles */
+        form {
+            margin-top: 20px;
+        }
+
+        /* Button styles */
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<h1>Register Page</h1>
+<div class="container">
+    <h1>Register Page</h1>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
 
-    <button type="submit">Submit</button>
-
-
-</form>
-
+        <button type="submit">Submit</button>
+    </form>
+</div>
 </body>
 </html>

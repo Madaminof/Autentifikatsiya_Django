@@ -3,18 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Book list styles */
+        .book-list {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-list a {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-list a:hover {
+            background-color: #0056b3;
+        }
+
+        .book-list hr {
+            margin-top: 20px;
+        }
+
+        .logout-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h1>Book List</h1>
+<div class="book-list">
+    <h1>Book List</h1>
 
-{% for i in book %}
+    {% for book_item in book %}
+        <a href="{% url 'products:detail' book_item.pk %}">{{ book_item.title }}</a><br>
+    {% endfor %}
 
-  <a href="{% url 'products:detail' i.pk %}" >{{ i.title }}</a><br>
-
-
-{% endfor %}
-
-
-
+    <hr>
+    <a class="logout-link" href="{% url 'users:logout' %}">Logout</a>
+</div>
 </body>
 </html>
