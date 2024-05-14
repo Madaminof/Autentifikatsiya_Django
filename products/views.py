@@ -1,13 +1,13 @@
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
-
-from django.shortcuts import render
+from .forms import AddReviewForm
+from django.shortcuts import render,redirect
 from django.views import View
 from django.views.generic.edit import FormMixin
 
-from .models import Books, Author
+from .models import Books, Author, Review
 
 # Create your views here.
 
@@ -45,5 +45,37 @@ class BookUptadeView(UpdateView):
 class Savat(BookDetailView):
     model=Books
     template_name='book/savat.html'
+
+
+
+class AddReview(LoginRequiredMixin,View):
+    def get(self,request,pk):
+        books=Books.objects.get(pk=pk)
+        addReview_form=AddReviewForm()
+        context={
+            'books':books,
+            'addReview_form':addReview_form
+        }
+        return render(request,'book/add_review.html',context=context)
+
+    def post(self, request, pk):
+        books=Books.objects.get(pk=pk)
+        addReview_form=AddReviewForm(request.POST)
+        if addReview_form.is_valid():
+            reviews=Review.objects.create(
+                comment=addReview_form.cleaned_data['comment'],
+                book=books,
+                user=request.user,
+                star_given=addReview_form.cleaned_data['star_given']
+            )
+            reviews.save()
+            return redirect('products:detail', pk=pk)
+
+
+class ViewReview(ListView):
+    model = Review
+    template_name = 'book/view_Review.html'
+    context_object_name = 'view'
+
 
 

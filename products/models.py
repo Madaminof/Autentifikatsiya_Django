@@ -3,6 +3,8 @@ from django.urls import reverse
 
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from users.models import CustomUser
+
 
 # Create your models here.
 
@@ -79,10 +81,9 @@ class Review(models.Model):
         default=0,
         validators=[MaxValueValidator(5), MinValueValidator(1)])
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
-    author=models.ForeignKey(Author, on_delete=models.CASCADE)
-
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     class Meta:
         db_table = 'review'
 
     def __str__(self):
-        return f"{self.comment} - {self.star_given} - {self.author.first_name}"
+        return f"{self.comment} - {self.star_given} {self.user.username}"

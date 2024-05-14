@@ -61,6 +61,15 @@
 
     <a href="{% url 'products:update' object.pk %}">Update</a><hr>
     <a href="{% url 'products:savat' object.pk %}">Sotib olish</a><hr>
+    <h2>Reviews</h2>
+<a href="{% url 'products:review' object.pk %}" >Kament Qo'shish</a>
+{% for r in reviews %}
+    <h4>{{ r.user.username }} | {{ r.star_given }}</h4>
+    <p>{{ r.comment }}</p><hr>
+{% endfor %}
+  <br> <br>
+<a href="{% url 'products:view_review' object.pk %}">Kamentni O'qish</a><hr>
+
      <a href="{% url 'products:list' %}">Go Back</a><hr>
 
 </div>
