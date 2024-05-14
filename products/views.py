@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
 from .forms import AddReviewForm
@@ -7,7 +7,7 @@ from django.shortcuts import render,redirect
 from django.views import View
 from django.views.generic.edit import FormMixin
 
-from .models import Books, Author, Review
+from .models import Books, Review
 
 # Create your views here.
 
@@ -76,6 +76,26 @@ class ViewReview(ListView):
     model = Review
     template_name = 'book/view_Review.html'
     context_object_name = 'view'
+
+    def get_queryset(self):
+        return Review.objects.order_by('-id')
+
+"""
+def delete_comment(request, pk):
+    review = Review.objects.get(pk=pk)
+    if request.method == 'POST':
+        review.delete()
+        return redirect('products:list')  # Redirect to the appropriate page after deletion
+    return render(request, 'confirm_delete_review.html',{'review':review})
+"""
+
+
+class UptadeCommentView(UpdateView):
+    model = Review
+    template_name = 'book/update_comment.html'
+    fields = ['comment','star_given']
+    success_url = reverse_lazy('products:list')
+
 
 
 

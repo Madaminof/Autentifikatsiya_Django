@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Molina</title>
+    <title>Malumotlar</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,7 +62,7 @@
     <a href="{% url 'products:update' object.pk %}">Update</a><hr>
     <a href="{% url 'products:savat' object.pk %}">Sotib olish</a><hr>
     <h2>Reviews</h2>
-<a href="{% url 'products:review' object.pk %}" >Kament Qo'shish</a>
+<a href="{% url 'products:review' books.pk %}" >Kament Qo'shish</a>
 {% for r in reviews %}
     <h4>{{ r.user.username }} | {{ r.star_given }}</h4>
     <p>{{ r.comment }}</p><hr>

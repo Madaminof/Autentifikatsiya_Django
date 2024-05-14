@@ -4,53 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sotuv Bo'limi</title>
+
     <style>
         /* CSS styles */
-        body {
+        .container {
             font-family: Arial, sans-serif; /* Set the font family */
             margin: 0; /* Remove default margin */
             padding: 0; /* Remove default padding */
         }
-
-        h1 {
+    
+        .container h1 {
             text-align: center; /* Center-align heading */
             color: #333; /* Set color for heading */
         }
-
-        img {
+    
+        .container img {
             display: block; /* Ensure the image is displayed as a block element */
             margin: 0 auto; /* Center-align the image */
             max-width: 100%; /* Ensure the image doesn't exceed its container */
             height: auto; /* Maintain aspect ratio of the image */
         }
-
-        hr {
+    
+        .container hr {
             border: none; /* Remove default border */
             border-top: 1px solid #ccc; /* Add a horizontal line */
             margin: 20px auto; /* Add margin above and below the line and center-align it */
             max-width: 80%; /* Set maximum width for the line */
         }
-
-        h2 {
+    
+        .container h2 {
             color: #666; /* Set color for subheadings */
         }
-
-        a {
+    
+        .container a {
             color: blue; /* Set color for links */
             text-decoration: none; /* Remove underline from links */
         }
-
-        a:hover {
+    
+        .container a:hover {
             text-decoration: underline; /* Underline links on hover */
         }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
     </style>
+    
 </head>
 <body>
-    <!-- Your HTML content here -->
-    <h1>Sotib Olish</h1>
-    <img src="{{ object.image.url }}" alt="Book Image"><hr>
-    <h2>Book Name: {{ object.title }}</h2>
-    <h2>Price: {{ object.price }}</h2>
+    <div class="container">
+        <h1>Sotib Olish</h1>
+        <img src="{{ object.image.url }}" alt="Book Image"><hr>
+        <h2>Book Name: {{ object.title }}</h2>
+        <h2>Price: {{ object.price }}</h2>
+        <form action="/payment" method="POST">
+            {% csrf_token %}
+            <label for="payment">Payment Amount:</label>
+            <input type="number" id="payment" name="payment" required>
+            <button type="submit">Pay Now</button>
+        </form>
+        <hr>
+        <a href="{% url 'products:detail' object.pk %}" >Orqaga</a>
+    </div>
 </body>
-<a href="{% url 'products:detail' object.pk %}">Orqaga</a>
 </html>

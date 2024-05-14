@@ -13,22 +13,56 @@
         .comment-container {
             margin-bottom: 20px;
             padding: 10px;
-            background-color: rgb(160, 165, 172);
+            background-color:rgb(175, 180, 180);
             border: 1px solid #ccc;
             border-radius: 5px;
         }
 
         .user {
-            color: #356496;
+            color: #007bff;
         }
+        .button {
+           
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  background-color: #007bff; /* Qora rang */
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.button-container {
+  text-align: center;
+}
+
+
+.button:hover {
+  background-color: #053a72; 
+}
+.comment-container a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+
     </style>
 </head>
 <body>
+
+    <div class="button-container">
+        <a href="{% url 'products:list' %}" class="button">Bosh Sahifaga O'tish</a><hr>
+      </div>
+      
+
 {% for i in view %}
 <div class="comment-container">
     <h4 class="user">User: {{ i.user }}</h4>
+    <p>Book Name: {{ i.book.title }}</p>
     <p>Comment: {{ i.comment }}</p>
     <p>Reaksiya: {{ i.star_given }}</p>
+    <a href="{% url 'products:update_comment' i.pk %}">Update</a>
+
 </div>
 <hr>
 {% endfor %}
