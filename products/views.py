@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -69,6 +70,7 @@ class AddReview(LoginRequiredMixin,View):
                 star_given=addReview_form.cleaned_data['star_given']
             )
             reviews.save()
+            messages.success(request, 'Review update successfully.')
             return redirect('products:detail', pk=pk)
 
 
@@ -95,6 +97,10 @@ class UptadeCommentView(UpdateView):
     template_name = 'book/update_comment.html'
     fields = ['comment','star_given']
     success_url = reverse_lazy('products:list')
+
+    def form_valid(self, form):
+        messages.success(self.request, ' updated successfully!')
+        return super().form_valid(form)
 
 
 
