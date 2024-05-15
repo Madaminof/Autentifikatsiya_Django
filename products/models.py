@@ -41,6 +41,7 @@ class Books(models.Model):
 
     created_at = models.DateField(auto_now_add=True)
     uptate_at = models.DateField(auto_now_add=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('products:detail', kwargs={'pk': self.pk})
@@ -85,5 +86,10 @@ class Review(models.Model):
     class Meta:
         db_table = 'review'
 
+
     def __str__(self):
         return f"{self.comment} - {self.star_given} {self.user.username}"
+
+
+
+

@@ -51,25 +51,33 @@
 </head>
 <body>
 <div class="container">
-    <img src="{{ object.image.url }}" height="250"><br>
-    <h3>Book name: {{ object.title }}</h3><br>
-    <h3>Date: {{ object.created_at }}</h3><br>
-    <h3>Description: {{ object.description }}</h3><br>
-    <h3>Page: {{ object.page }}</h3><br>
-    <h3>Price: {{ object.price }}</h3><hr>
+    <img src="{{ book.image.url }}" height="250"><br>
+    <h3>Book name: {{ book.title }}</h3><br>
+    <h3>Date: {{ book.created_at }}</h3><br>
+    <h3>Description: {{ book.description }}</h3><br>
+    <h3>Page: {{ book.page }}</h3><br>
+    <h3>Price: {{ book.price }}</h3><hr>
 
 
-    <a href="{% url 'products:update' object.pk %}">Update</a><hr>
-    <a href="{% url 'products:savat' object.pk %}">Sotib olish</a><hr>
+
+
+    <a href="{% url 'products:savat' book.pk %}">Sotib olish</a><hr>
     <h2>Reviews</h2>
-<a href="{% url 'products:review' books.pk %}" >Kament Qo'shish</a>
-{% for r in reviews %}
-    <h4>{{ r.user.username }} | {{ r.star_given }}</h4>
-    <p>{{ r.comment }}</p><hr>
-{% endfor %}
-  <br> <br>
-<a href="{% url 'products:view_review' object.pk %}">Kamentni O'qish</a><hr>
+<a href="{% url 'products:review' book.pk %}" >Kament Qo'shish</a>
 
+
+
+{% for i in reviews %}
+    <h4 class="user">User: {{ i.user }}</h4>
+    <p>Book Name: {{ i.book.title }}</p>
+    <p>Comment: {{ i.comment }}</p>
+    <p>Reaksiya: {{ i.star_given }}</p>
+   {% if request.user.id == i.user.id %}
+    <a href="{% url 'products:update_comment' i.pk %}">Update</a>
+
+{% endif %}
+<hr>
+{% endfor %}
      <a href="{% url 'products:list' %}">Go Back</a><hr>
 
 </div>

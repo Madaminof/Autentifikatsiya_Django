@@ -1,9 +1,10 @@
+from audioop import avg
 from django.contrib import messages
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
-from .forms import AddReviewForm
+from .forms import AddReviewForm,UpdateReviewForm
 from django.shortcuts import render,redirect
 from django.views import View
 from django.views.generic.edit import FormMixin
@@ -24,10 +25,14 @@ class BookListView(ListView):
     template_name = 'book/book_list.html'
     context_object_name = 'book'
 
+class BookDetailsView(View):
+    def get(self,request,pk):
+        book=Books.objects.get(pk=pk)
+        reviews=Review.objects.filter(book=pk)
+        return render(request,'book/book_detail.html',{'book':book,'reviews':reviews})
 
-class BookDetailView(DetailView):
-    model = Books
-    template_name = 'book/book_detail.html'
+
+
 
 
 class BookDeleteView(DeleteView):
@@ -43,7 +48,7 @@ class BookUptadeView(UpdateView):
 
 
 
-class Savat(BookDetailView):
+class Savat(BookDetailsView):
     model=Books
     template_name='book/savat.html'
 
@@ -74,34 +79,31 @@ class AddReview(LoginRequiredMixin,View):
             return redirect('products:detail', pk=pk)
 
 
+
+
+
+
+
+
 class ViewReview(ListView):
     model = Review
     template_name = 'book/view_Review.html'
     context_object_name = 'view'
 
+
     def get_queryset(self):
         return Review.objects.order_by('-id')
-
-"""
-def delete_comment(request, pk):
-    review = Review.objects.get(pk=pk)
-    if request.method == 'POST':
-        review.delete()
-        return redirect('products:list')  # Redirect to the appropriate page after deletion
-    return render(request, 'confirm_delete_review.html',{'review':review})
-"""
+   
 
 
-class UptadeCommentView(UpdateView):
+
+
+class UptadeCommentView(LoginRequiredMixin,UpdateView):
     model = Review
     template_name = 'book/update_comment.html'
     fields = ['comment','star_given']
-    success_url = reverse_lazy('products:list')
 
-    def form_valid(self, form):
-        messages.success(self.request, ' updated successfully!')
-        return super().form_valid(form)
-
-
+    def get_success_url(self):
+        return reverse('products:detail', kwargs={'pk': self.object.book.pk})
 
 

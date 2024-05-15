@@ -7,7 +7,7 @@ class AddReviewForm(ModelForm):
         model=Review
         fields=['comment','star_given']
 
-class DeleteReviewForm(forms.ModelForm):
+class UpdateReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = [] 
+        fields = ['star_given','comment']

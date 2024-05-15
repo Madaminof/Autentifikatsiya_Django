@@ -55,16 +55,17 @@
       </div>
       
 
-{% for i in view %}
+{% for i in reviews %}
 <div class="comment-container">
     <h4 class="user">User: {{ i.user }}</h4>
     <p>Book Name: {{ i.book.title }}</p>
     <p>Comment: {{ i.comment }}</p>
     <p>Reaksiya: {{ i.star_given }}</p>
-    <a href="{% url 'products:update_comment' i.pk %}">Update</a>
 
 </div>
 <hr>
 {% endfor %}
+
 </body>
+
 </html>
