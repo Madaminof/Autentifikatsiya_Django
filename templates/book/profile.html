@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .user-info {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info p {
+            margin-bottom: 10px;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+        }
+
+        .link-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .link-container a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .link-container a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Profile</h1>
+
+    <div class="user-info">
+        <img alt="user-image" style="border-radius: 55px" src="{{ user.image.url }}" height="100px"><br>
+        Username: {{ user.username }}<br>
+        First name: {{ user.first_name }}<br>
+        Last name: {{ user.last_name }}<br>
+        Email: {{ user.email }}<br>
+    </div>
+
+    <div class="link-container">
+        <a href="{% url 'products:list' %}">Go Back</a>
+        <a href="{% url 'products:profileupdate' %}">Edit</a>
+        <a href="{% url 'products:users' %}">Users</a>
+    </div>
+</body>
+</html>

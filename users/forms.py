@@ -6,7 +6,7 @@ class CustomUserForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'password')
+        fields = ('username','first_name','last_name', 'email', 'password')
 
     def save(self, commit=True):
         user = super().save(commit=False)  # Don't commit yet to avoid saving twice

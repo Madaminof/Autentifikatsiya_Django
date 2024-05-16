@@ -12,11 +12,11 @@
 }
 
 form {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -42,17 +42,22 @@ a {
 }
 
 a:hover {
+   
     text-decoration: underline;
 }
 
 </style>
 <body>
-    <h1>User: {{object.user}}</h1>
-<form method="post">{% csrf_token %}
+
+<h1>Profile update</h1>
+<form method="post"  enctype="multipart/form-data">
+    {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Update">
+    <input type="submit" value="Update Profile">
+   
+
 </form>
-<br>
-<a href="{% url 'products:list' %}">Go Back</a><hr>
+
+<a href="{% url 'products:profile' %}">Go Back</a>
 </body>
 </html>

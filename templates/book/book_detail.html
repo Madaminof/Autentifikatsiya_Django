@@ -7,19 +7,38 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
-            margin: 0;
+            margin: 10ox;
             padding: 0;
             text-align: center;
         }
 
         .container {
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 850px;
+            margin: 5px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #ebebeb;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .container1 {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 23px;
+            background-color: #346c8267;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }        
+        .container2 {
+            max-width: 500px;
+            margin: 10px auto;
+            padding: 23px;
+            background-color: #516b7567;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }       
+        
 
         img {
             display: block;
@@ -47,38 +66,45 @@
             border-top: 1px solid #ccc;
             width: 50%;
         }
+
+        
     </style>
 </head>
 <body>
 <div class="container">
-    <img src="{{ book.image.url }}" height="250"><br>
-    <h3>Book name: {{ book.title }}</h3><br>
-    <h3>Date: {{ book.created_at }}</h3><br>
-    <h3>Description: {{ book.description }}</h3><br>
-    <h3>Page: {{ book.page }}</h3><br>
-    <h3>Price: {{ book.price }}</h3><hr>
+    <div class="container1">
+        <img src="{{ book.image.url }}" height="250"><br>
+        <h3>Book name: {{ book.title }}</h3><br>
+        <h3>Date: {{ book.created_at }}</h3><br>
+        <h3>Description: {{ book.description }}</h3><br>
+        <h3>Page: {{ book.page }}</h3><br>
+        <h3>Price: {{ book.price }}</h3><hr>
+
+        <a href="{% url 'products:savat' book.pk %}">Sotib olish</a><hr>
+</div>
+
+<div class="container2">
+        <h2>Reviews</h2>
+    <a href="{% url 'products:review' book.pk %}" >Kament Qo'shish</a>
 
 
 
+    {% for i in reviews %}
+        <h4 class="user">User: {{ i.user }}</h4>
+        <p>Book Name: {{ i.book.title }}</p>
+        <p>Comment: {{ i.comment }}</p>
+        <p>Reaksiya: {{ i.star_given }}</p>
+    {% if request.user.id == i.user.id %}
+        <a href="{% url 'products:update_comment' i.pk %}">Update</a> /
+        <a href="{% url 'products:delete_comment' i.pk %}">Delete</a>
 
-    <a href="{% url 'products:savat' book.pk %}">Sotib olish</a><hr>
-    <h2>Reviews</h2>
-<a href="{% url 'products:review' book.pk %}" >Kament Qo'shish</a>
 
+    {% endif %}
+    <hr>
+    {% endfor %}
+</div>
 
-
-{% for i in reviews %}
-    <h4 class="user">User: {{ i.user }}</h4>
-    <p>Book Name: {{ i.book.title }}</p>
-    <p>Comment: {{ i.comment }}</p>
-    <p>Reaksiya: {{ i.star_given }}</p>
-   {% if request.user.id == i.user.id %}
-    <a href="{% url 'products:update_comment' i.pk %}">Update</a>
-
-{% endif %}
-<hr>
-{% endfor %}
-     <a href="{% url 'products:list' %}">Go Back</a><hr>
+        <a href="{% url 'products:list' %}">Go Back</a><hr>
 
 </div>
 </body>
